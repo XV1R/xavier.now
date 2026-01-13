@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}
+        .about-header {
+            margin-bottom: 2rem;
+        }
+        .about-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .about-content {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 2rem;
+        }
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+{% endblock %}
+
+{% block content %}
+        <div class="about-header">
+            <h1>About</h1>
+        </div>
+        <div class="about-content">
+            <h2>About me</h2>
+            <p>
+                My name is Xavier Rosado. I'm a software engineer from Puerto Rico. I studied Computer Science and Engineering in UPRM. I graduated in May 2024 and got my start at STR as an Associate Engineer. There, Iworked with software development and security reserch, largely tackling problems with fuzzers, system determinism, among other stuff. Now I'm looking for work in software. I came to learn that I enjoy tinkering with systems to make them better more than breaking them. I'm focusing on learning more about performance, concurrency, and system design. If you'd like to speak with me, socials are below!
+            <br>
+            <a href="github.com/XV1R">See my github.</a>
+            <br>
+            <a href="https://www.linkedin.com/in/xavier-rosado">See my LinkedIn.</a>
+            <br>
+            <a href="mailto:xavytron@gmail.com">Email me.</a>
+            <br>
+            </p>
+            <h2>What is this page</h2>
+            <p>This is an experiment in transparent writing. On any given day, I can start writing a blog post and you'll be able to see it happen live.</p>
+            <p>Previous posts are archived and can be found in the Archive section.</p>
+            <p>NOTE: Large sections of this codebase have been written with AI tooling. I am not a vibecoder, but this page is an excellent sandbox to get more familiar with modern AI practice. As such, much of this was either using claude or cusor. See repo for CLAUDE.md or message me with concerns? 
+        </div>
+{% endblock %}

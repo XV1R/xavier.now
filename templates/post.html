@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | default("xavier.now") }}</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            background: #fafafa;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+{% extends "base.html" %}
+
+{% block extra_styles %}
         header {
             display: flex;
             justify-content: space-between;
@@ -80,14 +60,12 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-    </style>
-</head>
-<body>
-    <div class="container">
+{% endblock %}
+
+{% block content %}
         <header>
             <div>
-                <h1>xavier.now</h1>
-                <span class="date" id="post-date">{{ date | default("") }}</span>
+                <h1>{{ date | default("") }}</h1>
             </div>
             <div>
                 <span class="status {{ 'live' if is_live else 'closed' }}" id="post-status">
@@ -101,7 +79,9 @@
                  id="post-content"
                  {% if is_admin %}contenteditable="true"{% endif %}>{{ content | default("") }}</div>
         </main>
-    </div>
+{% endblock %}
+
+{% block scripts %}
     <script src="/static/js/post.js"></script>
     <script>
         (function() {
@@ -117,5 +97,4 @@
             });
         })();
     </script>
-</body>
-</html>
+{% endblock %}

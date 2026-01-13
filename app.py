@@ -121,6 +121,7 @@ async def index(request: Request):
             "is_admin": admin,
             "is_live": True,
             "ws_token": ws_token,
+            "active_tab": "today",
         },
     )
 
@@ -164,9 +165,29 @@ async def logout():
     return response
 
 
+@app.get("/posts", response_class=HTMLResponse)
+async def posts_list(request: Request):
+    return templates.TemplateResponse(
+        "posts.html",
+        {
+            "request": request,
+            "title": "Archive - xavier.now",
+            "posts": [],
+            "active_tab": "posts",
+        },
+    )
+
+
 @app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
-    return HTMLResponse(content="<h1>About Xavier</h1>")
+    return templates.TemplateResponse(
+        "about.html",
+        {
+            "request": request,
+            "title": "About - xavier.now",
+            "active_tab": "about",
+        },
+    )
 
 
 def get_user_from_token(token: str | None) -> str | None:
