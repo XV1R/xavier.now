@@ -76,6 +76,14 @@ class ConnectionManager:
             except Exception:
                 pass
 
+    async def broadcast_cursor(self, position: int):
+        message = json.dumps({"type": "cursor", "position": position})
+        for viewer in self.viewers:
+            try:
+                await viewer.send_text(message)
+            except Exception:
+                pass
+
     async def send_content(self, websocket: WebSocket, content: str):
         message = json.dumps({"type": "content", "content": content})
         await websocket.send_text(message)
@@ -189,9 +197,13 @@ async def websocket_endpoint(websocket: WebSocket, token: str | None = Query(def
             data = await websocket.receive_text()
             message = json.loads(data)
 
-            if message.get("type") == "update" and is_admin_user:
+            msg_type = message.get("type")
+            if msg_type == "update" and is_admin_user:
                 current_content = message.get("content", "")
                 await manager.broadcast_content(current_content)
+            elif msg_type == "cursor" and is_admin_user:
+                position = message.get("position", 0)
+                await manager.broadcast_cursor(position)
     except WebSocketDisconnect:
         pass
     finally:
